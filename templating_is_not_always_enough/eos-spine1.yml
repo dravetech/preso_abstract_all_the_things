@@ -1,0 +1,26 @@
+asn: 65001
+router_id: "1.1.1.101"
+
+interfaces:
+  - name: "lo0"
+    ip_address: "2001:db8:b33f::101/128"
+  - name: "et1"
+    ip_address: "2001:db8:caf3:1::/127"
+  - name: "et2"
+    ip_address: "2001:db8:caf3:2::/127"
+  - name: "et3"
+    ip_address: "2001:db8:caf3:3::/127"
+  - name: "et4"
+    ip_address: "2001:db8:caf3:4::/127"
+  - name: "et5"
+    ip_address: "2001:db8:1::1/127"
+
+peers:
+  - ip: "2001:db8:1::"
+    asn: 65000
+  - ip: "2001:db8:caf3:1::1"
+    asn: 65001
+  - ip: "2001:db8:cafe:3::1"
+    asn: 65001
+  - ip: "2001:db8:caf3:4::1"
+    asn: 65001

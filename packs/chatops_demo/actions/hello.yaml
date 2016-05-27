@@ -1,0 +1,23 @@
+---
+name: hello
+pack: chatops_demo
+description: Simple task to test the pack is correctly installed and we hubot is listening.
+runner_type: local-shell-cmd
+enabled: true
+parameters:
+  cmd:
+    description: "Command to run"
+    immutable: true
+    default: "echo This mission is too important for me to allow you to jeopardize it."
+  sudo:
+    immutable: true
+    default: false
+  timeout:
+    immutable: true
+    default: 60
+  kwarg_op:
+    immutable: true
+    default: "--"
+  cwd:
+    immutable: true
+    default: "/tmp/"

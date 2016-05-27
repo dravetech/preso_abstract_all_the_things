@@ -1,0 +1,7 @@
+---
+chain:
+    - name: "save_key"
+      ref: "st2.kv.set"
+      params:
+          key: "{{exec_id}}"
+          value: "{{action_context.parent.api_user}}"

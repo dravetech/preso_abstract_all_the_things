@@ -1,0 +1,38 @@
+---
+name: remove_link
+pack: chatops_demo
+runner_type: python-script
+entry_point: 'invoke_wrapper.py'
+description: Remove a link from the fabric.
+enabled: true
+parameters:
+  task:
+    type: "string"
+    immutable: true
+    default: remove_link
+  task_path:
+    required: true
+    immutable: false
+    default: /vagrant/ansible/
+  left:
+    type: "string"
+    required: true
+    description: left device
+  left_port:
+    type: "string"
+    required: true
+    description: left port
+  right:
+    type: "string"
+    required: true
+    description: right device
+  right_port:
+    type: "string"
+    required: true
+    description: right port
+  sudo:
+    immutable: false
+    default: false
+  timeout:
+    immutable: true
+    default: 600

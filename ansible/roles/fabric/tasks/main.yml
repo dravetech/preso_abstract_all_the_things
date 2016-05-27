@@ -1,0 +1,6 @@
+---
+- name: "Building fabric configuration"
+  template: src="{{os}}/fabric.j2" dest="{{ conf_dir }}/fabric.conf"
+  changed_when: False
+  connection: local
+  when: commit_changes | match('0')

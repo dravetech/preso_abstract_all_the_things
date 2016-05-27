@@ -1,0 +1,11 @@
+set interfaces ge-0/0/1.0 family inet6 address 2001:db8:2::/127
+set interfaces ge-0/0/2.0 family inet6 address 2001:db8::1/127
+
+set routing-options router-id 1.1.1.2
+set routing-options autonomous-system 65000
+set protocols bgp group spines neighbor 2001:db8:2::1 peer-as 65001
+set protocols bgp group vmx neighbor 2001:db8:: peer-as 65000
+
+set policy-options policy-statement PERMIT_ALL then accept
+set protocols bgp export PERMIT_ALL
+set protocols bgp import PERMIT_ALL

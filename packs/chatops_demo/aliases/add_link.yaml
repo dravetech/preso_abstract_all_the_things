@@ -1,0 +1,10 @@
+---
+name: "add_link"
+description: "Add a link to the fabric."
+action_ref: "chatops_demo.add_link"
+formats:
+  - "add fabric link {{left}}:{{left_port}} {{right}}:{{right_port}}"
+ack:
+  enabled: false
+result:
+  format: "{~}{{ execution.result.result }} "

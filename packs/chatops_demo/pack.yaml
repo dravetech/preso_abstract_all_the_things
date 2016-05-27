@@ -1,0 +1,11 @@
+---
+name: chatops_demo
+description: A simple pack to perform a chatops_demo.
+keywords:
+    - chatops
+    - ansible
+    - napalm
+    - netops
+version: 0.1
+author: dbarrosop
+email: dbarrosop@dravetech.com

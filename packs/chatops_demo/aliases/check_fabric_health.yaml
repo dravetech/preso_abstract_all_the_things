@@ -1,0 +1,10 @@
+---
+name: "check_fabric_health"
+description: "Check Fabric Health."
+action_ref: "chatops_demo.check_fabric_health"
+formats:
+  - "check fabric health"
+  - "everything alright?"
+  - "cfh"
+result:
+  format: "{{ execution.result.result }} {~}"

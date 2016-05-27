@@ -1,0 +1,12 @@
+---
+name: "confirm"
+description: "Confirm Action"
+action_ref: "chatops_demo.confirm_exec"
+formats:
+  - "confirm {{ exec_id }}"
+ack:
+  format: "Confirming action!"
+  append_url: false
+result:
+  enabled: false
+  message: 'adasda'

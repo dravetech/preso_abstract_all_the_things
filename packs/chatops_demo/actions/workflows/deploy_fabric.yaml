@@ -1,0 +1,72 @@
+version: '2.0'
+
+chatops_demo.deploy_fabric_with_confirm:
+  description: A workflow to deploy fabric.
+  type: direct
+  tasks:
+    publish_data:
+      action: core.noop
+      publish:
+        chat_user: <% env().get('__actions').get('st2.action').st2_context.parent.api_user %>
+        source_channel: <% env().get('__actions').get('st2.action').st2_context.parent.source_channel %>
+        exec_id: <% env().get('__actions').get('st2.action').st2_context.parent.execution_id %>
+      on-success:
+        - deploy_fabric_dry_run
+
+    deploy_fabric_dry_run:
+      action: chatops_demo.deploy_fabric
+      input:
+        commit: false
+      publish:
+        pretty_output: <% task(deploy_fabric_dry_run).result.result %>
+      on-success:
+        - notify_dry_run
+
+    notify_dry_run:
+      action: chatops.post_message
+      input:
+        message: '@<% $.chat_user %> Awaiting for confirmation for task <% $.exec_id %>: <% $.pretty_output %>'
+        channel: '<% $.source_channel %>'
+      on-success:
+        - wait_for_confirmation
+
+    wait_for_confirmation:
+      action: st2.kv.get
+      input:
+        key: '<% $.exec_id %>'
+      retry:
+        count: 3
+        delay: 10
+      on-error:
+        - post_not_confirmed
+      on-success:
+        - post_confirmed
+
+    post_not_confirmed:
+      action: chatops.post_message
+      input:
+        channel: '<% $.source_channel %>'
+        message: '@<% $.chat_user %>, I have not received confirmation for <% $.exec_id %>. Aborting.'
+
+    post_confirmed:
+      action: chatops.post_message
+      input:
+        channel: '<% $.source_channel %>'
+        message: '@<% $.chat_user %>, The action <% $.exec_id %> is confirmed. Proceeding...'
+      on-success:
+        - deploy_fabric_commit
+
+    deploy_fabric_commit:
+      action: chatops_demo.deploy_fabric
+      input:
+        commit: True
+      publish:
+        pretty_output: <% task(deploy_fabric_dry_run).result.result %>
+      on-success:
+        - notify_commit
+
+    notify_commit:
+      action: chatops.post_message
+      input:
+        message: '@<% $.chat_user %> Changes confirmed: <% $.pretty_output %>'
+        channel: '<% $.source_channel %>'

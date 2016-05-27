@@ -1,0 +1,17 @@
+---
+name: restart_docker_hubot
+pack: chatops_demo
+description: Restart docker-hubot instance.
+criteria: {}
+enabled: true
+trigger:
+  parameters:
+    timezone: UTC
+    hour: 1
+    minute: 0
+    second: 0
+  type: core.st2.CronTimer
+action:
+  parameters:
+    cmd: service docker-hubot restart
+  ref: core.local_sudo

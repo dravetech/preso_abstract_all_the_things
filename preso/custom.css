@@ -1,0 +1,38 @@
+@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+
+.reveal section img { background:none; border:none; box-shadow:none; }
+
+strong {color: #E82C2C;}
+
+.reveal {
+  font-size: 64px;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+}
+
+.reveal h1 {
+  font-size: 2.0em; }
+
+.reveal h2 {
+  font-size: 1.5em; }
+
+.reveal h3 {
+  font-size: 1.25em; }
+
+.reveal h4 {
+  font-size: 1em; }
+
+  .reveal pre code {
+    display: block;
+    padding: 5px;
+    overflow: auto;
+    max-height: 1000px;
+    word-wrap: normal; }

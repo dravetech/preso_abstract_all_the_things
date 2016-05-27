@@ -1,0 +1,36 @@
+ipv6 unicast-routing
+
+int Lo0
+  ipv6 address 2001:db8:b33f::101/128
+
+int e1
+  no switchport
+  ipv6 address 2001:db8:caf3:1::/127
+int e2
+  no switchport
+  ipv6 address 2001:db8:caf3:2::/127
+int e3
+  no switchport
+  ipv6 address 2001:db8:cafe:3::/127
+int e4
+  no switchport
+  ipv6 address 2001:db8:caf3:4::/127
+
+int et5
+   no switchport
+   ipv6 address 2001:db8:1::1/127
+
+router bgp 65001
+   router-id 1.1.1.101
+   neighbor 2001:db8:1:: remote-as 65000
+   neighbor 2001:db8:caf3:1::1 remote-as 65001
+   neighbor 2001:db8:caf3:2::1 remote-as 65001
+   neighbor 2001:db8:caf3:3::1 remote-as 65001
+   neighbor 2001:db8:caf3:4::1 remote-as 65001
+
+   address-family ipv6
+     neighbor 2001:db8:1:: activate
+     neighbor 2001:db8:caf3:1::1 activate
+     neighbor 2001:db8:caf3:2::1 activate
+     neighbor 2001:db8:caf3:4::1 activate
+     network 2001:db8:b33f::101/128

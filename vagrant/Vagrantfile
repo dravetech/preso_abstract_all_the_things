@@ -1,0 +1,31 @@
+"""
+You will need the boxes:
+* vEOS-4.15.2F - https://eos.arista.com/using-veos-with-vagrant-and-virtualbox/
+* JunOS - juniper/ffp-12.1X47-D20.7-packetmode
+   * To provision and test JunOS first you have to add the ssh vagrant ssh key into the ssh-agent. I.e.:
+       ssh-add /opt/vagrant/embedded/gems/gems/vagrant-1.7.4/keys/vagrant
+"""
+
+Vagrant.configure(2) do |config|
+  config.vm.define "st2" do |st2|
+    st2.vm.network "private_network", type: "dhcp"
+    st2.vm.box = "puppetlabs/ubuntu-14.04-64-nocm"
+
+    st2.vm.network :forwarded_port, guest: 443, host: 19443, id: 'api'
+
+    st2.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+    end
+
+    st2.vm.synced_folder "../", "/vagrant"
+
+    st2.vm.provision "shell", inline: <<-SHELL
+      sudo dd if=/dev/zero of=/swapfile bs=1024 count=524288
+      sudo chmod 600 /swapfile
+      sudo mkswap /swapfile
+      sudo swapon /swapfile
+      sudo bash /vagrant/vagrant/st2/st2bootstrap-deb.sh
+    SHELL
+
+  end
+end

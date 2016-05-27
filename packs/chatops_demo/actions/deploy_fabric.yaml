@@ -1,0 +1,27 @@
+---
+name: deploy_fabric
+pack: chatops_demo
+runner_type: python-script
+entry_point: 'invoke_wrapper.py'
+description: Deploy fabric configuration.
+enabled: true
+parameters:
+  task:
+    type: "string"
+    immutable: true
+    default: deploy_fabric
+  task_path:
+    required: true
+    immutable: false
+    default: /vagrant/ansible/
+  commit:
+    type: "boolean"
+    required: true
+    description: Commit changes
+    default: false
+  sudo:
+    immutable: false
+    default: false
+  timeout:
+    immutable: true
+    default: 600

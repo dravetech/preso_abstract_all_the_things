@@ -1,0 +1,21 @@
+ipv6 unicast-routing
+
+{% for interface in interfaces %}
+
+default int {{ interface.name }}
+int {{ interface.name }}
+  no switchport
+  ipv6 address {{ interface.ip_address }}
+
+{% endfor %}
+
+no router bgp
+router bgp {{ asn }}
+   router-id {{ router_id }}
+
+{% for peer in peers %}
+     neighbor {{ peer.ip }} remote-as {{ peer.asn }}
+     address-family ipv6
+       neighbor {{ peer.ip }} activate
+
+{% endfor %}

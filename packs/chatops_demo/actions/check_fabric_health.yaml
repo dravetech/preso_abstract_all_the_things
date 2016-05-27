@@ -1,0 +1,22 @@
+---
+name: check_fabric_health
+pack: chatops_demo
+runner_type: python-script
+entry_point: 'invoke_wrapper.py'
+description: Check fabric health.
+enabled: true
+parameters:
+  task:
+    type: "string"
+    immutable: true
+    default: check_fabric_health
+  task_path:
+    required: true
+    immutable: false
+    default: /vagrant/ansible/
+  sudo:
+    immutable: false
+    default: false
+  timeout:
+    immutable: true
+    default: 600

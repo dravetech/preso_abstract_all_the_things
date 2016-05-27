@@ -1,0 +1,7 @@
+[backbone]
+vmx.core1 ansible_host=asd
+vmx.core2 ansible_host=asd
+
+[spine]
+eos.spine1 ansible_host=asd
+eos.spine2 ansible_host=asd

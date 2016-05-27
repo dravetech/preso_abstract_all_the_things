@@ -1,0 +1,28 @@
+---
+name: "hello_world"
+description: "Hello world!"
+action_ref: "chatops_demo.hello"
+formats:
+  - "hello"
+ack:
+  enabled: false
+result:
+  # format: "{{ execution.result.stdout }} {~}"
+  extra:
+    slack:
+      content:
+          color: "#1100ff"
+          fallback: "Required plain-text summary of the attachment number 2."
+          pretext: "Optional text that appears above the attachment block number 2"
+          author_name: "Bobby Tables number 2"
+          author_link: "http://flickr.com/bobby/"
+          author_icon: "http://flickr.com/icons/bobby.jpg"
+          title: "Slack API Documentation number 2"
+          title_link: "https://api.slack.com/"
+          text: "{{ execution.result.stdout }}"
+          fields:
+            - title: "Priority"
+              value: "Low"
+              short: false
+          image_url: "http://my-website.com/path/to/image.jpg"
+          thumb_url: "http://example.com/path/to/thumb.png"

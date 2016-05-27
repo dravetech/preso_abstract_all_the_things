@@ -1,0 +1,18 @@
+---
+# curl -k -H "Content-Type: application/json" -X POST https://172.28.128.3/api/v1/webhooks/remove_link -H "St2-Api-Key: NmYyZWVmNmYxYmZhNzE4Y2QyZmMwNTM3NzRmNDNkNWVhZmQ1YWQzNTliZTk5NDEwYzYwNTQ1M2NmMWI0YmMxNg" --data '{"left": "a", "left_port": "1", "right": "b", "right_port": "2"}'
+name: remove_link
+description: Webhook to allow removing a link.
+pack: chatops_demo
+criteria: {}
+enabled: true
+trigger:
+    type: "core.st2.webhook"
+    parameters:
+        url: "remove_link"
+action:
+  ref: chatops_demo.remove_link
+  parameters:
+    left: '{{trigger.body.left}}'
+    left_port: '{{trigger.body.left_port}}'
+    right: '{{trigger.body.right}}'
+    right_port: '{{trigger.body.right_port}}'

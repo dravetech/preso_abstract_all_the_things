@@ -1,0 +1,36 @@
+{% macro conf_link(name, index, is_left, peer) -%}
+{% set network = "{}{}::/127".format(fabric_link_prefix, index) %}
+{% set ip = network|ipaddr(0) if is_left else network|ipaddr(1) %}
+{% set peer_ip = network|ipaddr(1)|ipaddr('address') if is_left else network|ipaddr(0)|ipaddr('network') %}
+
+default interface {{ name }}
+interface {{ name }}
+  no switchport
+  ipv6 address {{ ip }}
+
+router bgp {{ asn }}
+  neighbor {{ peer_ip }} remote-as {{ hostvars[peer]['asn'] }}
+  address-family ipv6
+    neighbor {{ peer_ip }} activate
+
+{%- endmacro %}
+
+ipv6 unicast-routing
+
+default interface Lo0
+interface Lo0
+  ipv6 address {{ loopback_net|ipaddr(id)|ipaddr('address') }}/128
+
+default router bgp
+router bgp {{ asn }}
+   maximum-paths 16 ecmp 16
+   router-id {{ router_id_net|ipaddr(id)|ipaddr('address') }}
+   network {{ loopback_net|ipaddr(id)|ipaddr('address') }}/128
+
+{% for link in fabric %}
+{% if inventory_hostname == link.left %}
+{{ conf_link(link.left_port, loop.index, true, link.right) }}
+{% elif inventory_hostname == link.right %}
+{{ conf_link(link.right_port, loop.index, false, link.left) }}
+{% endif %}
+{% endfor %}

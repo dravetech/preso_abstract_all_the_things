@@ -1,0 +1,25 @@
+---
+- name: Main playbook to configure the network
+  hosts: all
+  gather_facts: no
+  connection: local
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+
+  tasks:
+    - name: get bgp neighbors from device
+      napalm_get_facts:
+       hostname={{ ansible_host }}
+       username=ntc
+       password=ntc123
+       dev_os={{ os }}
+       filter='bgp_neighbors'
+      register: bgp_neighbors.ansible_facts.bgp_neighbors
+    - include_vars: roles/fabric/vars/main.yml
+    - name: Check fabric health
+      check_fabric_links:
+        device_name={{ inventory_hostname }}
+        fabric={{fabric}}
+        fabric_link_prefix={{fabric_link_prefix}}
+        bgp_neighbors={{bgp_neighbors}}
+      tags: ['print_action']

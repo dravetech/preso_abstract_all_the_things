@@ -1,0 +1,19 @@
+---
+# curl -k -H "Content-Type: application/json" -X POST https://172.28.128.3/api/v1/webhooks/add_link -H "St2-Api-Key: NmYyZWVmNmYxYmZhNzE4Y2QyZmMwNTM3NzRmNDNkNWVhZmQ1YWQzNTliZTk5NDEwYzYwNTQ1M2NmMWI0YmMxNg" --data '{"left": "eos.spine1", "left_port": "eth3", "right": "eos.spine2", "right_port": "eth3"}'
+{"right_port": "eth3", "right": "eos.spine2", "left_port": "eth3", "left": "eos.spine1"}
+name: add_link
+description: Webhook to allow adding a link.
+pack: chatops_demo
+criteria: {}
+enabled: true
+trigger:
+    type: "core.st2.webhook"
+    parameters:
+        url: "add_link"
+action:
+  ref: chatops_demo.add_link
+  parameters:
+    left: '{{trigger.body.left}}'
+    left_port: '{{trigger.body.left_port}}'
+    right: '{{trigger.body.right}}'
+    right_port: '{{trigger.body.right_port}}'

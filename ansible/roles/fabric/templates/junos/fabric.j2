@@ -1,0 +1,52 @@
+{% macro conf_link(name, index, is_left, peer) -%}
+{% set network = "{}{}::/127".format(fabric_link_prefix, index) %}
+{% set ip = network|ipaddr(0) if is_left else network|ipaddr(1) %}
+{% set peer_ip = network|ipaddr(1)|ipaddr('address') if is_left else network|ipaddr(0)|ipaddr('network') %}
+interfaces {
+    replace:
+    {{ name }} {
+        unit 0 {
+            family inet6 {
+                address {{ ip }};
+            }
+        }
+    }
+}
+
+protocols {
+    bgp {
+        group peers {
+            neighbor {{ peer_ip }} {
+                peer-as {{ hostvars[peer]['asn'] }};
+            }
+        }
+    }
+}
+{%- endmacro %}
+
+routing-options {
+    router-id {{ router_id_net|ipaddr(id)|ipaddr('address') }};
+    autonomous-system {{ asn }};
+}
+
+policy-options {
+    policy-statement PERMIT_ALL {
+      from protocol bgp;
+      then accept;
+    }
+}
+protocols {
+    replace:
+    bgp {
+        import PERMIT_ALL;
+        export PERMIT_ALL;
+  }
+}
+
+{% for link in fabric %}
+{% if inventory_hostname == link.left %}
+{{ conf_link(link.left_port, loop.index, true, link.right) }}
+{% elif inventory_hostname == link.right %}
+{{ conf_link(link.right_port, loop.index, false, link.left) }}
+{% endif %}
+{% endfor %}

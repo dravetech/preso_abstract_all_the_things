@@ -1,0 +1,15 @@
+---
+# Action definition metadata
+name: "confirm_exec"
+description: "Confirm action execution"
+runner_type: "action-chain"
+enabled: true
+entry_point: "workflows/confirm_exec.yaml"
+parameters:
+  exec_id:
+    type: string
+    required: true
+    description: "Action execution to confirm"
+  skip_notify:
+    default:
+      - "save_key"

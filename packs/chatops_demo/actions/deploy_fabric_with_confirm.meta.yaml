@@ -1,0 +1,7 @@
+---
+description: Deploy fabric configuration with confirm.
+enabled: true
+entry_point: workflows/deploy_fabric.yaml
+name: deploy_fabric_with_confirm
+pack: chatops_demo
+runner_type: mistral-v2

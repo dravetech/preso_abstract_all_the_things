@@ -1,0 +1,21 @@
+---
+name: update_repo
+pack: chatops_demo
+runner_type: local-shell-cmd
+description: Updates the repo that contains this demo
+enabled: true
+parameters:
+  cmd:
+    immutable: true
+    default: "git pull"
+  sudo:
+    immutable: true
+    default: false
+  timeout:
+    immutable: true
+    default: 60
+  kwarg_op:
+    immutable: true
+    default: "--"
+  cwd:
+    default: "/tmp/chatops_demo"

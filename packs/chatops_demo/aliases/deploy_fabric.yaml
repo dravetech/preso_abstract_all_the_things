@@ -1,0 +1,8 @@
+---
+name: "deploy_fabric"
+description: "Deploy fabric configuration."
+action_ref: "chatops_demo.deploy_fabric_with_confirm"
+formats:
+  - "deploy fabric"
+result:
+  format: "Action {{ execution.id }} completed {~}"

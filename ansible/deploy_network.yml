@@ -1,0 +1,62 @@
+---
+- name: Main playbook to configure the network
+  hosts: all
+  gather_facts: no
+  connection: local
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+    conf_dir: "{{playbook_dir}}/compiled/{{ inventory_hostname }}"
+
+  pre_tasks:
+    - set_fact: conf_dir="{{conf_dir}}"
+    - name: Remove old config
+      file: path={{ conf_dir }} state=absent
+      changed_when: False
+      when: commit_changes | match('0')
+      always_run: yes
+      tags: ['always']
+    - name: Create placeholder for building templates
+      file: path=compiled/{{ inventory_hostname }}/ state=directory
+      changed_when: False
+      when: commit_changes | match('0')
+      always_run: yes
+      tags: ['always']
+
+#### START ROLES
+- name: fabric
+  hosts: all
+  gather_facts: no
+  connection: local
+  roles:
+    - fabric
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+# - name: peering
+#   hosts: all
+#   gather_facts: no
+#   connection: local
+#   roles:
+#     - peering
+#   vars:
+#     ansible_python_interpreter: "/usr/bin/env python"
+#### END ROLES
+
+  post_tasks:
+    - name: Assemble all the configuration bits
+      assemble: src={{ conf_dir }}/ dest={{ conf_dir }}/assembled.conf
+      always_run: yes
+      changed_when: False
+      when: commit_changes | match('0')
+      tags: ['always']
+    - name: Deploy Configuration
+      napalm_install_config:
+        hostname={{ ansible_host }}
+        username=ntc
+        dev_os={{ os }}
+        password=ntc123
+        config_file={{ conf_dir }}/assembled.conf
+        commit_changes={{ commit_changes }}
+        replace_config=False
+        get_diffs=True
+        diff_file={{ conf_dir }}/diff
+      tags: ['always', 'print_action']

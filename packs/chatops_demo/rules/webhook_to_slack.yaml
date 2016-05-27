@@ -1,0 +1,20 @@
+---
+# curl -k -H "Content-Type: application/json" -X POST https://10.0.2.2:19443/api/v1/webhooks/slack_message -H "St2-Api-Key: YmRkYmIyMWE3MTAxZWNlOWQwNmUwYjBiYjU5YWEyN2M2MDgzZWJhN2Q1NGFmNjljYzE0YjU0ZWJkNmE4NGRlZg" --data '{"type": "device_log", "device": "sw1", "message": "ALERT!!!ALERT!! We are all gonna die!!!"}'
+name: device_report_to_slack
+description: Webhook to allow a device to report something into slack.
+pack: chatops_demo
+criteria: {}
+enabled: true
+criteria:
+  trigger.body.type:
+    pattern: device_log
+    type: equals
+trigger:
+    type: "core.st2.webhook"
+    parameters:
+        url: "slack_message"
+action:
+  parameters:
+    channel: chatops_demo_dbarroso
+    message: '*{{trigger.body.device}}*: ```{{trigger.body.message}}```'
+  ref: chatops.post_message

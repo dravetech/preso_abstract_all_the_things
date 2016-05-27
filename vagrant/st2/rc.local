@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+ssh-agent -s
+ssh-add /tmp/vagrant_key
