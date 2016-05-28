@@ -15,6 +15,6 @@ trigger:
         url: "slack_message"
 action:
   parameters:
-    channel: chatops_demo_dbarroso
+    channel: REPLACEME
     message: '*{{trigger.body.device}}*: ```{{trigger.body.message}}```'
   ref: chatops.post_message

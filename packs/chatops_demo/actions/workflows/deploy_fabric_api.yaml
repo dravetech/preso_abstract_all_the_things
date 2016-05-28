@@ -8,7 +8,7 @@ chatops_demo.deploy_fabric_with_confirm_api:
       action: core.noop
       publish:
         chat_user: 'channel'
-        source_channel: 'chatops_demo_dbarroso'
+        source_channel: 'REPLACEME'
         exec_id: <% env().get('__actions').get('st2.action').st2_context.parent.execution_id %>
       on-success:
         - deploy_fabric_dry_run
