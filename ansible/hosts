@@ -1,7 +1,7 @@
 [backbone]
-vmx.core1 ansible_host=asd
-vmx.core2 ansible_host=asd
+vmx.core1 ansible_host=176.126.91.139
+vmx.core2 ansible_host=31.220.64.52
 
 [spine]
-eos.spine1 ansible_host=asd
-eos.spine2 ansible_host=asd
+eos.spine1 ansible_host=153.92.32.59
+eos.spine2 ansible_host=176.126.89.101
