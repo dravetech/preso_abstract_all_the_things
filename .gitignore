@@ -62,3 +62,8 @@ test/unit/test_devices.py
 
 .vagrant
 ansible/compiled
+
+ansible/hosts-r
+packs/chatops_demo/actions/workflows/deploy_fabric_api.yaml-r
+packs/chatops_demo/rules/webhook_to_slack.yaml-r
+vagrant/st2/st2bootstrap-deb.sh-r
