@@ -1,4 +1,25 @@
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Abstract All the Things](#abstract-all-the-things)
+	- [Requirements](#requirements)
+	- [Instructions](#instructions)
+		- [Prepare the environment](#prepare-the-environment)
+		- [Start the lab](#start-the-lab)
+		- [Configuring the environment](#configuring-the-environment)
+		- [Start ST2](#start-st2)
+			- [Stop ST2](#stop-st2)
+
+<!-- /TOC -->
+
 # Abstract All the Things
+
+## Requirements
+
+* A bash shell
+* python2.7
+* virtualbox
+* vagrant
+* A slack channel with hubot enabled (optional)
 
 ## Instructions
 
@@ -12,7 +33,8 @@ pip install -r requirements.txt
 
 ### Start the lab
 
-For this preso I used an online lab hosted by [network.toCode()](https://labs.networktocode.com/). The lab name is `MULTI-VENDOR EOS (2) AND VMX (2)`. If you want to try it out [network.toCode()](http://networktocode.com/) has been kindly enough to provide a promotion code: `napalm6`. The promotion code will let you run the lab at least once.
+For this demo I used an online lab hosted by [network.toCode()](https://labs.networktocode.com/). The lab name is `MULTI-VENDOR EOS (2) AND VMX (2)`. If you want to try it out [network.toCode()](http://networktocode.com/) has been kindly enough to provide a promotion code: `napalm6`. The promotion code will let you run the lab to the first 100 users. Please, don't abuse it, you have 6 hours to try out this demo, which should be plenty of time if you make sure your environment is set correctly.
+
 
 > Note: Neither me or my employer are in any way affiliated with [network.toCode()](http://networktocode.com/).
 
