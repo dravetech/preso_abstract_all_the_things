@@ -18,18 +18,10 @@ parameters:
     type: "string"
     required: true
     description: left device
-  left_port:
-    type: "string"
-    required: true
-    description: left port
   right:
     type: "string"
     required: true
     description: right device
-  right_port:
-    type: "string"
-    required: true
-    description: right port
   sudo:
     immutable: false
     default: false

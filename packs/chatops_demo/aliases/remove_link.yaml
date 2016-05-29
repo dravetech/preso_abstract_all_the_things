@@ -3,7 +3,7 @@ name: "remove_link"
 description: "Remove a link from the fabric."
 action_ref: "chatops_demo.remove_link"
 formats:
-  - "remove fabric link {{left}}:{{left_port}} {{right}}:{{right_port}}"
+  - "remove fabric link {{left}} {{right}}"
 ack:
   enabled: false
 result:

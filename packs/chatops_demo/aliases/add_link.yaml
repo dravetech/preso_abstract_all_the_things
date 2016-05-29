@@ -3,7 +3,7 @@ name: "add_link"
 description: "Add a link to the fabric."
 action_ref: "chatops_demo.add_link"
 formats:
-  - "add fabric link {{left}}:{{left_port}} {{right}}:{{right_port}}"
+  - "add fabric link {{left}} {{right}}"
 ack:
   enabled: false
 result:
