@@ -11,7 +11,10 @@
 	- [Start ST2 (optional)](#start-st2-optional)
 - [Test everything works](#test-everything-works)
 	- [Ansible](#ansible)
-	- [Slack](#slack)
+	- [Slack (optional)](#slack-optional)
+	- [API (optional)](#api-optional)
+- [Time to play](#time-to-play)
+- [Destroying ST2 (optional)](#destroying-st2-optional)
 
 <!-- /TOC -->
 
@@ -119,6 +122,10 @@ $ curl -k -H "Content-Type: application/json" -X POST https://$IP/api/v1/webhook
 
 Replace the `$IP` and the `$St2-Api-Key` with the info you gathered when starting the VM.
 
-## Destroying ST2 (optonal)
+## Time to play
+
+Now it's time for you to play. Feel free to play with ansible, invoke, slack, whatever. It's all yours now : )
+
+## Destroying ST2 (optional)
 
 When you are done don't forget to destroy the VM we used for the slack/API integration. You can do that by just going to the `vagrant` folder on this project and executing `vagrant destroy`.
