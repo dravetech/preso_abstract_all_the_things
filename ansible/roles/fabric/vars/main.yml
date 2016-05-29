@@ -4,7 +4,6 @@ fabric:
 - {left: vmx.core2, left_port: ge-0/0/1, right: eos.spine2, right_port: eth5}
 - {left: eos.spine1, left_port: eth1, right: eos.spine2, right_port: eth1}
 - {left: eos.spine1, left_port: eth2, right: eos.spine2, right_port: eth2}
-- {left: eos.spine1, left_port: eth3, right: eos.spine2, right_port: eth3}
 fabric_link_prefix: '2001:db8:c4f3:'
 loopback_net: 2001:db8:b33f::/64
 router_id_net: 10.1.1.0/24
