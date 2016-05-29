@@ -31,15 +31,6 @@
     - fabric
   vars:
     ansible_python_interpreter: "/usr/bin/env python"
-# - name: peering
-#   hosts: all
-#   gather_facts: no
-#   connection: local
-#   roles:
-#     - peering
-#   vars:
-#     ansible_python_interpreter: "/usr/bin/env python"
-#### END ROLES
 
   post_tasks:
     - name: Assemble all the configuration bits
