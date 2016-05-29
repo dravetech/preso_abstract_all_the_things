@@ -45,7 +45,7 @@ class InvokeWrapper(Action):
                     cmd.append('--{}'.format(k))
             else:
                 cmd.append('--{}={}'.format(k, v))
-        print(cmd)
+        os.environ['I_AM_ST2'] = '1'
         process = subprocess.Popen(cmd, cwd=task_path,
                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = process.communicate()

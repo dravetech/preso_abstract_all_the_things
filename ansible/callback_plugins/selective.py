@@ -8,6 +8,7 @@ Output is a bit nicer than the default one.
 from __future__ import (absolute_import, division, print_function)
 
 import difflib
+import os
 
 from ansible.plugins.callback import CallbackBase
 
@@ -24,24 +25,10 @@ COLORS = {
     'endc': '\033[0m',
 }
 
-COLORS_SLACK = {
-    'normal': '',
-    'ok': '*',
-    'bold': '*',
-    'not_so_bold': '',
-    'changed': '```',
-    'failed': '~',
-}
-
 
 def colorize_shell(msg, color):
     """Given a string add necessary codes to format the string."""
     return '{}{}{}'.format(COLORS[color], msg, COLORS['endc'])
-
-
-def colorize_slack(msg, color):
-    """Given a string add necessary codes to format the string."""
-    return '{}{}{}'.format(COLORS_SLACK[color], msg, COLORS_SLACK[color])
 
 
 def dont_colorize(msg, color):
@@ -49,7 +36,10 @@ def dont_colorize(msg, color):
     return msg
 
 
-colorize = dont_colorize
+if os.environ.get('I_AM_ST2', False):
+    colorize = dont_colorize
+else:
+    colorize = colorize_shell
 
 
 class CallbackModule(CallbackBase):
