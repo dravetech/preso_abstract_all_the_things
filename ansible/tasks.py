@@ -15,8 +15,11 @@ def deploy_fabric(commit=False):
 
 
 @invoke.task()
-def add_link(left, left_port, right, right_port):
+def add_link(left, right):
     """Add a link to the fabric."""
+    left, left_port = left.split(":")
+    right, right_port = right.split(":")
+
     with open(FABRIC_FILE, 'r') as f:
         content = yaml.load(f.read())
 
@@ -42,8 +45,10 @@ def add_link(left, left_port, right, right_port):
 
 
 @invoke.task()
-def remove_link(left, left_port, right, right_port):
+def remove_link(left, right):
     """Remove a link from the fabric."""
+    left, left_port = left.split(":")
+    right, right_port = right.split(":")
     with open(FABRIC_FILE, 'r') as f:
         content = yaml.load(f.read())
 
