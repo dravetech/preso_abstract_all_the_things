@@ -1,4 +1,4 @@
 ansible
 napalm
-invoke
+invoke==0.12.2
 jinja2

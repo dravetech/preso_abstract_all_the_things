@@ -1,4 +1,4 @@
 napalm-junos
 napalm-eos
 ansible
-invoke
+invoke==0.12.2
